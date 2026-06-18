@@ -8,7 +8,8 @@ A collection of Python projects built while learning and exploring the language.
 
 | # | Project | Description |
 |---|---|---|
-| 01 | [QR Code Generator](./qr-code-generator/) | Generates a QR code from any URL or text and saves it as a PNG |
+| 01 | [QR Code Generator](./QR%20Code%20Generator/) | Generates a QR code from any URL or text and saves it as a PNG |
+| 02 | [Wallpaper Viewer](./Wallpaper%20Viewer/) | A Tkinter GUI that loads images from a local folder and lets you cycle through them with a "Next" button |
 
 > More projects coming soon!
 
@@ -32,10 +33,10 @@ General requirements across projects:
 git clone https://github.com/Ishant25Dubey/Python-Learnings.git
 ```
 
-2. Navigate into a project folder
+2. Navigate into the project folder you want to run
 
 ```bash
-cd qr-code-generator
+cd <project-folder>
 ```
 
 3. Follow the setup steps in that project's `README.md`
