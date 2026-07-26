@@ -6,7 +6,8 @@ A simple Streamlit app that converts one or more uploaded images into a single d
 
 - Upload multiple images at once
 - Instant preview of the uploaded images
-- Combines everything into a single PDF, with one image per page in upload order
+- Reorder uploaded images using up and down buttons
+- Combines everything into a single PDF, with one image per page in the specified order
 - Supports common raster formats (JPG, PNG, BMP, TIFF, etc.) via `img2pdf`
 - High-quality output: JPEGs are embedded directly without recompression, preserving original image quality
 - One-click download of the generated PDF
@@ -16,7 +17,8 @@ A simple Streamlit app that converts one or more uploaded images into a single d
 1. Upload one or more image files.
 2. The app converts them into a single PDF.
 3. A preview of the uploaded images is displayed.
-4. Click **Download PDF** to save the result as `output.pdf`.
+4. Use the up and down buttons to reorder the images.
+5. Click **Download PDF** to save the result as `output.pdf`. 
 
 If conversion fails, an error message is shown instead of the preview and download button.
 
