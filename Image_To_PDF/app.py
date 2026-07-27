@@ -7,6 +7,9 @@ uploaded_files = st.file_uploader(
     "Upload Images", type="image/*", accept_multiple_files=True
 )
 
+a4_page_size = (img2pdf.mm_to_pt(210), img2pdf.mm_to_pt(297))
+layout_function = img2pdf.get_layout_fun(a4_page_size)
+
 if "images" not in st.session_state:
     st.session_state.images = []
 
@@ -61,7 +64,9 @@ if st.session_state.images:
 
     try:
         image_bytes = [f.getvalue() for f in st.session_state.images]
-        pdf = img2pdf.convert(image_bytes)
+        pdf = img2pdf.convert(
+            image_bytes, rotation=img2pdf.Rotation.ifvalid, layout_fun=layout_function
+        )
 
     except Exception as e:
         st.error(f"Failed to create pdf as {e}", icon="🚨")
