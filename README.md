@@ -11,7 +11,8 @@ A collection of Python projects built while learning and exploring the language.
 | 01 | [QR Code Generator](./QR%20Code%20Generator/) | Generates a QR code from any URL or text and saves it as a PNG |
 | 02 | [Wallpaper Viewer](./Wallpaper%20Viewer/) | A Tkinter GUI that loads images from a local folder and lets you cycle through them with a "Next" button |
 | 03 | [Calculator](./Calculator/) | A Tkinter desktop calculator with support for basic operations (+, −, ×, ÷) |
-| 04 | [Image To PDF (Streamlit)](./Image%20To%20PDF%20%28Streamlit%29/) | A Streamlit web app that converts uploaded images into a single downloadable PDF |
+| 04 | [Image To PDF (Streamlit)](./Image_To_PDF/) | A Streamlit web app that converts uploaded images into a single downloadable PDF |
+| 05 | [Modi Runner](./modi_runner/) | A 2D endless runner game built with Pygame-CE where you play as Modi dodging Rahul Gandhi (snail) and Trump (fly) obstacles with parallax backgrounds, sound effects, and scoring |
 
 > More projects coming soon!
 
