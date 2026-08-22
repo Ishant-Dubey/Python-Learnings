@@ -3,6 +3,7 @@ from random import choice, randint
 from sys import exit
 
 import pygame
+import json
 
 
 class Player(pygame.sprite.Sprite):
@@ -110,10 +111,24 @@ def display_score():
     return last_score
 
 
+def high_score_update():
+    global high_score
+    with open("highscore.json", "r") as f:
+        data = json.load(f)
+
+    if data["high_score"] < last_score:
+        high_score = last_score
+        with open("highscore.json", "w") as f:
+            data["high_score"] = last_score
+            json.dump(data, f)
+    high_score = data["high_score"]
+    return high_score
+
+
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 collision_sound = pygame.mixer.Sound("audio/game_over.mp3")
-collision_sound.set_volume(3)
+collision_sound.set_volume(0.5)
 screen = pygame.display.set_mode((1024, 576))
 pygame.display.set_caption("Modi Runner")
 
@@ -159,6 +174,8 @@ txt_font = pygame.font.Font("font/PixeloidSans.ttf", 30)
 last_score = 0
 score_surf = txt_font.render("Score: 0", False, "#1E293B")
 score_rect = score_surf.get_rect(center=(512, 50))
+high_score = 0
+
 
 # Environment
 sky_surf = pygame.image.load("assets/environment/sky.png").convert()
@@ -176,7 +193,7 @@ player_stand = pygame.image.load("assets/intro/player.png")
 player_stand = pygame.transform.scale_by(player_stand, factor=0.35)
 player_stand_rect = player_stand.get_rect(center=(512, 280))
 
-game_message = txt_font.render("* Press SPACE To Run *", False, "#B8F8A4")
+game_message = txt_font.render("* Press SPACE To Run *", False, "#C8FF9A")
 game_message_rect = game_message.get_rect(center=(512, 465))
 
 sky_x_pos = 0
@@ -249,12 +266,24 @@ while True:
     else:
         player.sprite.rect.midbottom = (160, 475)
         player.sprite.gravity = 0
-        screen.blit(intro_image, (0, 0))
+
+        # Score
         score_message = txt_font.render(
-            f"* Your Score: {last_score} *", False, "#B8F8A4"
+            f"* Your Score : {last_score} *", False, "#FFE84A"
         )
         score_message_rect = score_message.get_rect(center=(512, 465))
+
+        # High Score
+        high_score = high_score_update()
+        high_score_message = txt_font.render(
+            f"* High Score : {high_score} *", False, "#FFC52E"
+        )
+        high_score_message_rect = high_score_message.get_rect(center=(512, 530))
+
+        screen.blit(intro_image, (0, 0))
         screen.blit(player_stand, player_stand_rect)
+        if high_score != 0:
+            screen.blit(high_score_message, high_score_message_rect)
         if last_score == 0:
             screen.blit(game_message, game_message_rect)
         else:
