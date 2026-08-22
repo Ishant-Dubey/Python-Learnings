@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_sound.set_volume(0.3)
 
     def apply_gravity(self):
-        self.gravity += 1.1
+        self.gravity += 70 * dt
         self.rect.y += self.gravity
         if self.rect.bottom >= 475:
             self.rect.bottom = 475
@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom < 475:
             self.image = self.player_jump
         else:
-            self.player_index += 0.1
+            self.player_index += 5 * dt
             if self.player_index >= len(self.player_walk):
                 self.player_index = 0
             self.image = self.player_walk[int(self.player_index)]
@@ -51,12 +51,12 @@ class Obstacle(pygame.sprite.Sprite):
             self.frames = fly_frames
             y_pos = 335
             self.base_y = y_pos
-            self.speed = 7
+            self.speed = 350 * dt
         else:
             self.frames = snail_frames
             y_pos = 475
             self.base_y = y_pos
-            self.speed = 5
+            self.speed = 270 * dt
 
         self.animation_index = 0
         self.image = self.frames[int(self.animation_index)]
@@ -66,7 +66,7 @@ class Obstacle(pygame.sprite.Sprite):
         if self.type == "fly":
             self.animation_index += 0.24
         else:
-            self.animation_index += 0.1
+            self.animation_index += 6 * dt
         if self.animation_index >= len(self.frames):
             self.animation_index = 0
         self.image = self.frames[int(self.animation_index)]
@@ -205,6 +205,7 @@ obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, 1500)
 
 while True:
+    dt = clock.tick(90) / 1000
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -234,12 +235,12 @@ while True:
 
     if game_active:
         # Parallax Sky
-        sky_x_pos -= 0.75
+        sky_x_pos -= 45 * dt
         if sky_x_pos <= -1024:
             sky_x_pos = 0
 
         # Parallax Ground
-        ground_x_pos -= 3
+        ground_x_pos -= 130 * dt
         if ground_x_pos <= -1024:
             ground_x_pos = 0
 
@@ -289,4 +290,3 @@ while True:
         else:
             screen.blit(score_message, score_message_rect)
     pygame.display.update()
-    clock.tick(60)
